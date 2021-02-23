@@ -1,9 +1,13 @@
 {
   "name": "wistroni40-es-flatter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "wistron i40 elasticsearch aggregations",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteveLin100132/wistroni40-es-flatter.git"
+  },
   "scripts": {
     "eslint": "./node_modules/.bin/eslint --ignore-path .eslintignore ./src/**",
     "eslint:fix": "./node_modules/.bin/eslint ./src/** --fix",

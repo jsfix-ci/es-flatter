@@ -35,7 +35,7 @@ const flattedResult = new ElasticSearchAggsFlatter(result).getBody<any>();
 
 ### constructor
 
-BnftTemplate的建構值
+建構值
 
 Parameter | Type | Required | Default | Description
 |:-----|:-----:|:-----:|:-----:|:-----|
