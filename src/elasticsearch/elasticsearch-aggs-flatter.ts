@@ -96,7 +96,7 @@ export class ElasticSearchAggsFlatter {
   private getRows(
     bucket: any,
     additionalColumns: any,
-    bucketName?: string
+    bucketName?: string,
   ): any {
     let rows: any[] = [];
 
@@ -123,7 +123,7 @@ export class ElasticSearchAggsFlatter {
         const newRows = this.getRows(
           subBucket,
           newAdditionalColumns,
-          subBucketName
+          subBucketName,
         );
         rows = [...rows, ...newRows];
       });
@@ -147,7 +147,7 @@ export class ElasticSearchAggsFlatter {
             const newRows = this.getRows(
               bucketValue,
               newAdditionalColumns,
-              subBucketName
+              subBucketName,
             );
             rows = [...rows, ...newRows];
             continue;
@@ -182,7 +182,7 @@ export class ElasticSearchAggsFlatter {
   private fillFieldsForSpecificAggregation(
     obj: any,
     value: any,
-    field: any
+    field: any,
   ): void {
     for (const key in value) {
       if (key === 'values') {
@@ -195,7 +195,6 @@ export class ElasticSearchAggsFlatter {
         obj[field][key] = value[key];
       }
     }
-    return;
   }
 
   /**
@@ -265,7 +264,7 @@ export class ElasticSearchAggsFlatter {
     const head: string[] = [];
     this.flattenBuckets.forEach((element: any) => {
       const keys = Object.keys(element);
-      keys.forEach((key) => {
+      keys.forEach(key => {
         if (head.indexOf(key) === -1) {
           head.push(key);
         }
@@ -281,6 +280,9 @@ export class ElasticSearchAggsFlatter {
    * @return 回傳扁平化後的資料內容
    */
   public getBody<T = any>(): T[] {
+    this.flattenBuckets = this.flattenBuckets.filter(
+      item => Object.keys(item).length > 0,
+    );
     return this.flattenBuckets;
   }
 

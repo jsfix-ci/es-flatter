@@ -31,7 +31,7 @@ interface DataModel {
  * -----------------------------------------------------------------------------
  */
 
-const client = new Client({ node: 'http://localhost:9200/' });
+const client = new Client({ node: 'http://10.66.28.41:9200/' });
 
 /**
  * -----------------------------------------------------------------------------
@@ -45,7 +45,7 @@ const client = new Client({ node: 'http://localhost:9200/' });
     .query(
       esb
         .boolQuery()
-        .must([esb.rangeQuery('evt_dt').gte(1613923200000).lt(1614009600000)])
+        .must([esb.rangeQuery('evt_dt').gte(1613923200000).lt(1614009600000)]),
     )
     .agg(
       esb
@@ -53,13 +53,12 @@ const client = new Client({ node: 'http://localhost:9200/' });
         .agg(
           esb
             .termsAggregation('kpiId', 'kpi_id.raw')
-            .agg(esb.sumAggregation('amount', 'amount'))
-        )
+            .agg(esb.sumAggregation('amount', 'amount')),
+        ),
     );
 
   const aggs = await client.search({
-    index: 'your_index_*',
-    type: 'your_type',
+    index: '1benefit_ntd*',
     body: query.toJSON(),
   });
 
